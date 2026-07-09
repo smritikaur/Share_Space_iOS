@@ -1,10 +1,3 @@
-//
-//  ShareSpaceUITestsLaunchTests.swift
-//  ShareSpaceUITests
-//
-//  Created by singsys on 27/06/26.
-//
-
 import XCTest
 
 final class ShareSpaceUITestsLaunchTests: XCTestCase {

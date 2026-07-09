@@ -1,10 +1,3 @@
-//
-//  ShareSpaceTests.swift
-//  ShareSpaceTests
-//
-//  Created by singsys on 27/06/26.
-//
-
 import Testing
 @testable import ShareSpace
 
