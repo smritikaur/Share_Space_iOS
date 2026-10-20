@@ -17,13 +17,11 @@ struct LoginScreenView: View {
                 if !isSignedIn {
                     SignInButtonView()
                 } else {
-                    // Signed In
-                    Text("Welcome back!")
+                    CustomTabBarView()
                 }
             }
-            .navigationTitle("Sign In")
+            .navigationTitle("Home")
         }
-        
     }
 }
 
