@@ -1,26 +1,11 @@
 import SwiftUI
 
+/// Sign-in screen. `RootView` switches to the main tabs once `SignInButtonView`
+/// stores a `userId`, so this view no longer decides what comes after sign-in.
 struct LoginScreenView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
-    @AppStorage("email") var email: String = ""
-    @AppStorage("firstName") var firstName: String = ""
-    @AppStorage("lastName") var lastName: String = ""
-    @AppStorage("userId") var userId: String = ""
-    
-    private var isSignedIn: Bool {
-        !userId.isEmpty
-    }
     var body: some View {
-        NavigationView {
-            VStack {
-                if !isSignedIn {
-                    SignInButtonView()
-                } else {
-                    CustomTabBarView()
-                }
-            }
-            .navigationTitle("Home")
+        VStack {
+            SignInButtonView()
         }
     }
 }

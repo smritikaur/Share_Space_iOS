@@ -1,95 +1,6 @@
 import SwiftUI
 
-// MARK: DefaultTabView
-
-struct DefaultTabView: View {
-    
-    /**
-     How a tap works ?
-     1. The app launches with selecetdTab == 0, so the tab tagged 0 (Home) is shown.
-     2. The user taps "Settings" in the tab bar.
-     3. The TabView writes that tab's tag, 1, into selecetdTab through the binding.
-     4. The state changed, so SwiftUI redraws body, and the tab tagged 1 (Settings) is now selected.
-     */
-    
-    @State private var selecetdTab = 0
-    var body: some View {
-        TabView(selection: $selecetdTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .tag(0)
-            
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gear")
-                }
-                .tag(1)
-        }
-        .tint(.monsterShadeOne)
-    }
-}
-
-#Preview {
-    DefaultTabView()
-}
-
-struct HomeView: View {
-    var body: some View {
-        Text("Home")
-    }
-}
-
-struct SettingsView: View {
-    var body: some View {
-        Text("Settings")
-    }
-}
-
-// MARK: CustomTabBar View
-
-struct CustomTabBarView: View {
-    /**
-     - Key Insight - Separate tab content from tabbar.
-     - This ZStack pattern with content behind and tab bar on top is the foundation for every custom tab bar.
-     */
-    
-    @State private var selectedTab: Int = 0
-    
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            // Content
-            TabContent(selectedTab: selectedTab)
-            // Custom Tab Bar
-            CustomTabBar(selectedTab: $selectedTab)
-        }
-    }
-}
-
-struct TabContent: View {
-    let selectedTab: Int
-    var body: some View {
-        Group {
-            switch selectedTab {
-            case 0:
-                Color.blue.opacity(0.1)
-                    .overlay(Text("Home"))
-            case 1:
-                Color.green.opacity(0.1)
-                    .overlay(Text("Settings"))
-            case 2:
-                Color.orange.opacity(0.1)
-                    .overlay(Text("Favs"))
-            case 3:
-                Color.purple.opacity(0.1)
-                    .overlay(Text("Profile"))
-            default:
-                EmptyView()
-            }
-        }.ignoresSafeArea()
-    }
-}
+// MARK: CustomTabBar
 
 struct CustomTabBar: View {
     @Binding var selectedTab: Int
@@ -100,7 +11,7 @@ struct CustomTabBar: View {
         TabItem(icon: "heart.fill", title: "Favorites"),
         TabItem(icon: "person.fill", title: "Profile")
     ]
-    
+
     var body: some View {
         HStack {
             ForEach(tabs.indices, id: \.self) { index in
@@ -183,7 +94,7 @@ struct TabBarButton: View {
                              : .identity,
                              in: .capsule)
                 .scaleEffect(isSelected ? 1.1 : 1.0)
-                
+
             } else {
                 // Fallback on earlier versions
             }
@@ -191,3 +102,6 @@ struct TabBarButton: View {
     }
 }
 
+#Preview {
+    CustomTabBar(selectedTab: .constant(0))
+}
